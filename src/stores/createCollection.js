@@ -40,7 +40,7 @@ export default function createCollection () {
       const index = store.dispatchers.push(dispatcher)
       // Unsubscribe the dispatcher by removing its reference in the store.
       return () => {
-        state.dispatchers[index - 1] = null
+        store.dispatchers[index - 1] = null
       }
     }
 

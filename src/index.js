@@ -8,6 +8,9 @@ import useOption from './stores/Options'
 import OddFilter from './components/Filters/Odd'
 import Generation from './components/Generation'
 
+// Layout.
+import CrossBar from './layout/CrossBar'
+
 function PogoDex () {
   const [size, setSize] = useOption('TileSize', 'small')
 
@@ -20,9 +23,30 @@ function PogoDex () {
     padding: '0.5em'
   }
 
+  const bottomSection = {
+    position: 'absolute',
+    bottom: '0em',
+    width: '100%'
+  }
+
+  const bottomControls = (
+    <div style={bottomSection}>
+      <CrossBar>
+        Filters: <OddFilter />
+      </CrossBar>
+    </div>
+  )
+
   return (
     <div>
-      <input type='button' value='Toggle Size' onClick={onSizeChange} />
+      {
+        // This will actually appear at the bottom, but the filters need to be
+        //    rendered before the Generations, so it's here.
+        bottomControls
+      }
+      <CrossBar>
+        <input type='button' value='Toggle Size' onClick={onSizeChange} />
+      </CrossBar>
       <div style={interiorStyle}>
         <h1>Hello World!</h1>
         <Generation number={1} />
