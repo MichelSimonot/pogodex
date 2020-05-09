@@ -5,32 +5,30 @@ import ReactDOM from 'react-dom'
 import useOption from './stores/Options'
 
 // Components.
-import SmallEntry from './components/Entry/Small'
-import MediumEntry from './components/Entry/Medium'
-
-// Layout.
-import Board from './layout/Board'
+import OddFilter from './components/Filters/Odd'
+import Generation from './components/Generation'
 
 function PogoDex () {
   const [size, setSize] = useOption('TileSize', 'small')
-
-  // Test data.
-  const tiles = Array.from(Array(15).keys()).map(num => {
-    return size === 'small'
-      ? <SmallEntry key={num} num={num} />
-      : <MediumEntry key={num} num={num} />
-  })
 
   function onSizeChange (event) {
     const newSize = size === 'small' ? 'medium' : 'small'
     setSize(newSize)
   }
 
+  const interiorStyle = {
+    padding: '0.5em'
+  }
+
   return (
     <div>
       <input type='button' value='Toggle Size' onClick={onSizeChange} />
-      <h1>Hello World!</h1>
-      <Board entries={tiles} />
+      <div style={interiorStyle}>
+        <h1>Hello World!</h1>
+        <Generation number={1} />
+        <Generation number={2} />
+      </div>
+
     </div>
   )
 }
